@@ -2,7 +2,7 @@
 
 To get started, follow these steps:
 
-1. Create a free account on the Rstudio Cloud: https://rstudio.cloud/ ** Please do this even if you already have Rstudio installed on your computer!**
+1. Create a free account on the Rstudio Cloud: https://rstudio.cloud/ **Please do this even if you already have Rstudio installed on your computer!**
 
 2. In RStudio Cloud, join the Workspace title "xxx'
 
