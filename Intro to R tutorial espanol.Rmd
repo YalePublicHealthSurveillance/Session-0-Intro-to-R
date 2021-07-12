@@ -20,7 +20,7 @@ library(reshape2)
 ```
 
 ```{r import, include=FALSE}
-#Cualquier objeto creado aqu? estar? disponible en el entorno global. Cualquier objeto creado dentro de este pedazo del ejercisio solo est? disponible dentro del pedazo.
+#Cualquier objeto creado aquí estará disponible en el entorno global. Cualquier objeto creado dentro de este pedazo del ejercisio solo esta disponible dentro del pedazo.
 
 #x <- getURL("https://raw.githubusercontent.com/weinbergerlab/Brazil_state/master/prelog_Brazil_state_processed_data.csv")
 #ds1<-read.csv("https://raw.githubusercontent.com/weinbergerlab/Brazil_state/master/prelog_Brazil_state_processed_data.csv")
@@ -50,10 +50,10 @@ mat1<-cbind(time.index, state31) #Combine en matriz
 
 
 # Introducción a R
-En este tutorial, aprenderas c?mo manipular y trazar datos en R
+En este tutorial, aprenderas cómo manipular y trazar datos en R
 
 ## Comencemos mirando algunos datos reales
-Estos datos de hospitalizaci?n a causa de neumon?a en ni?os <12 meses de edad en Brasil. Los datos est?n al nivel estatal, y cada columna le corresponde a uno de los 27 estados. Los datos est?n guardado como *matriz*, con 27 columnas y 144 filas, representando datos mensuales durante 12 a?os.
+Estos datos de hospitalización a causa de neumonía en niños <12 meses de edad en Brasil. Los datos estan al nivel estatal, y cada columna le corresponde a uno de los 27 estados. Los datos estan guardado como *matriz*, con 27 columnas y 144 filas, representando datos mensuales durante 12 años.
 
 ```{r br1a, exercise=TRUE, exercise.eval=FALSE}
 head(ds3) #Vea las primeras 6 files de datos 
@@ -83,9 +83,9 @@ plot(ds3[,'state52'], type='l')
 
 ## Operando con vectores y matrices
 
-En R se puede operar con numeros individuales (es decir, calcular el valor de 1+1) con vectores de numeros (es decir, un variable), o con matrices. Los datos ademas se pueden guardar en marcos de datos que es como una matriz pero se puede guardar una mezcla de variables num?ricas y variables de caracteres.
+En R se puede operar con numeros individuales (es decir, calcular el valor de 1+1) con vectores de numeros (es decir, un variable), o con matrices. Los datos ademas se pueden guardar en marcos de datos que es como una matriz pero se puede guardar una mezcla de variables numericas y variables de caracteres.
 
-Primero, extraiga una de las columnas de los datos de Brazil, crea un variable de ?ndice y juntalas en una nueva matriz. 
+Primero, extraiga una de las columnas de los datos de Brazil, crea un variable de índices y juntalas en una nueva matriz. 
 
 ```{r vectormaker, exercise=TRUE, exercise.eval=FALSE}
 state31 <- ds3[,'state31'] #Crea un vector llamado 'state31'
@@ -94,7 +94,7 @@ length.state31
 ```
 
 ```{r vectormakerb, exercise=TRUE, exercise.eval=FALSE}
-time.index <- 1:length.state31 #Crea un ?ndice 1,2,3... que tenga la misma longitud de 'state31' 
+time.index <- 1:length.state31 #Crea un ?índice 1,2,3... que tenga la misma longitud de 'state31' 
 
 state31[1:50] #Imprime las primeras 50 observaciones
 time.index[1:50] #Imprime las primeras 50 observaciones
@@ -102,10 +102,10 @@ time.index[1:50] #Imprime las primeras 50 observaciones
 ```
 
 
-Vectores (variables) se pueden juntar en una matriz o un marco de datos. (Marcos de datos tiene el ventaja de poder incluir variables num?ricas y caracteres). Intente cambiar el c?digo para imprimir las primeras 20 filas de datos en vez de las primeras 10 filas de datos.
+Vectores (variables) se pueden juntar en una matriz o un marco de datos. (Marcos de datos tiene el ventaja de poder incluir variables numericas y caracteres). Intente cambiar el codigo para imprimir las primeras 20 filas de datos en vez de las primeras 10 filas de datos.
 
 ```{r matrixmaker1, exercise=TRUE, exercise.eval=FALSE}
-time.index <- 1:length.state31 #Crea un ?ndice 1,2,3... que tenga la misma longitud de 'state31' 
+time.index <- 1:length.state31 #Crea un índices 1,2,3... que tenga la misma longitud de 'state31' 
 mat1<-cbind(time.index, state31) #Combine en matriz
 mat1[1:10,] #Imprime las primeras 10 filas de 'mat1'
 
@@ -117,7 +117,7 @@ dimnames(mat1)
 ```
 
 ```{r matrixmaker12, exercise=TRUE, exercise.eval=FALSE}
-#Obtenga el n?mero de filas y columnas en 'mat1'
+#Obtenga el numero de filas y columnas en 'mat1'
 nrow(mat1)
 ```
 
@@ -141,7 +141,7 @@ mat1[1:10,'state31']
 mat1[1:10,2]
 ```
 
-Uno puede subcontratar la matriz haciendo referencia a los nombres o posici?n de columnas espec?ficas. Intente imprimir Brazil y imprimir las primeras 10 filas de datos en vez de 20 filas. 
+Uno puede subcontratar la matriz haciendo referencia a los nombres o posición de columnas específicas. Intente imprimir Brazil y imprimir las primeras 10 filas de datos en vez de 20 filas. 
 ```{r matrixmaker1b, exercise=TRUE, exercise.eval=FALSE}
 br.subset <-ds3[,c('state31', 'state32')]
 br.subset[1:20,]
@@ -162,7 +162,7 @@ mat2[1:20,] #Imprime las primeras 20 filas
 
 ```
 
-Este c?digo reemplaza la primera columna de la matriz con un vector de observaciones. Intente reemplazar la segunda columna con los datos observados de estado 31. Adem?s intente usar 'rnorm' para generar n?meros al azar para columna 3. 
+Este codigo reemplaza la primera columna de la matriz con un vector de observaciones. Intente reemplazar la segunda columna con los datos observados de estado 31. Ademos intente usar 'rnorm' para generar numeros al azar para columna 3. 
 
 ```{r matrixMaker2, exercise=TRUE, exercise.eval=FALSE}
 
@@ -173,8 +173,8 @@ mat2[1:20,]
 
 ```
 
-## Aritm?tica en R
-Ahora, hagamos aritm?tica simple con estas variables, y combinarlas en una matriz.
+## Aritmética en R
+Ahora, hagamos aritmetica simple con estas variables, y combinarlas en una matriz.
 Quizas quisiera agregar 2 variables, y combinarlas en una matriz con columnas nombradas, imprimir las primeras 20 filas.
 ```{r aggregateRows, exercise=TRUE, exercise.eval=FALSE}
 combo<- ds3[,'state31'] + ds3[,'state33']
@@ -191,11 +191,10 @@ df1[1:20,'combo'] #Imprime las primeras 20 filas de la variable 'combo'
 comboAdd[1:20]
 ```
 
-Quizas adem?s quisiera agregar en todas las columnas. Se puede cumplir usando la funci?n 'rowSums' o con la funci?n 'apply' los cuales repite cada operaci?n por cada fila. Luego impreme las primeras 20 observaciones. 
+Quizas además quisiera agregar en todas las columnas. Se puede cumplir usando la función 'rowSums' o con la función 'apply' los cuales repite cada operación por cada fila. Luego impreme las primeras 20 observaciones. 
 ```{r aggregateRows3, exercise=TRUE, exercise.eval=FALSE}
 national<- rowSums(ds3)
 national[1:20]
-
 national2<- apply(ds3,1,sum)  # 1 refers to rows and 2 refers to columns
 national2[1:20]
 ```
@@ -220,30 +219,30 @@ Trabajando con variables de fecha puede ser complicado en R. El paquete 'lubrida
 #Como crear una secuencia temporal con fechas
 from <- as.Date("2003-01-01") #YYYY-MM-DD
 timefill <- seq.Date(from=from,length.out =nrow(ds3) ,by="week") 
-timefill[1:144] #Imprimir los primeros a?os
+timefill[1:144] #Imprimir los primeros años
 ```
 
-Si tienes un vector de fechas en formato de car?cter, tienes que comandar R que es una fecha usando 'as.Date', y decirle cu?l es el formato. For ejemplo, mm/dd/yy tiene el formato "%m/%d/%y".
+Si tienes un vector de fechas en formato de caracter, tienes que comandar R que es una fecha usando 'as.Date', y decirle cual es el formato. Por ejemplo, mm/dd/yy tiene el formato "%m/%d/%y".
 ```{r dates2, exercise=TRUE, exercise.eval=FALSE}
-#Si la fecha est? en formato mm/dd/aa
+#Si la fecha esta en formato mm/dd/aa
 date1<-c("01/01/98", "02/01/98","03/01/98")
-date2 = as.Date(as.character(date1), format = "%m/%d/%y")  #Tenga en cuenta que una Y min?scula coresponde a a?os con 2 d?gitos
+date2 = as.Date(as.character(date1), format = "%m/%d/%y")  #Tenga en cuenta que una Y minuscula coresponde a años con 2 digitos
 date2
 
 ```
 
-Aqu? la fecha est? en formato mm/dd/aaaa. Le decimos esto a R usando el formato "%m/%d/%Y". Tenga en cuenta que la Y may?scula coresponde a a?os con 4 d?gitos. 
+aquí la fecha esta en formato mm/dd/aaaa. Le decimos esto a R usando el formato "%m/%d/%Y". Tenga en cuenta que la Y mayúscula coresponde a años con 4 digitos. 
 ```{r dates3, exercise=TRUE, exercise.eval=FALSE}
-#Si la fecha est? en formato mm/dd/aaaa
+#Si la fecha esta en formato mm/dd/aaaa
 date1<-c("01/01/1998", "02/01/1998","03/01/1998")
-date2 = as.Date(as.character(date1), format = "%m/%d/%Y")  #Tenga en cuenta que una Y may?scula coresponde a a?os con 4 d?gitos
+date2 = as.Date(as.character(date1), format = "%m/%d/%Y")  #Tenga en cuenta que una Y mayúscula coresponde a años con 4 dígitos
 date2
 
 ```
 
-Transformando fechas en R es flexible y puedes utilizar cualquier formato. Por ejemplo, aqu? tenemos una fecha en formato dd-mm-aa, y le decimos a R que est? en formato "%d-%m-%y". 
+Transformando fechas en R es flexible y puedes utilizar cualquier formato. Por ejemplo, aquí tenemos una fecha en formato dd-mm-aa, y le decimos a R que esta en formato "%d-%m-%y". 
 ```{r dates4, exercise=TRUE, exercise.eval=FALSE}
-#Si la fecha est? en formato mm-dd-aa
+#Si la fecha esta en formato mm-dd-aa
 date1<-c("01-01-98", "01-02-98","01-03-98")
 date2 = as.Date(as.character(date1), format = "%d-%m-%y")  
 date2
@@ -251,16 +250,16 @@ date2
 ```
 
 
-## Creando trazados ?tiles
+## Creando trazados tiles
 
-Vamos a trazar los datos. 'type='l'' hace un trazado de l?nea, que es ?til para secuencia temporal
+Vamos a trazar los datos. 'type='l'' hace un trazado de l?nea, que es til para secuencia temporal
 
 ```{r plot1, exercise=TRUE, exercise.eval=FALSE}
 national<- rowSums(ds3)
 plot(date.index,national, type='l')
 ```
 
-### Ahora vamos a cambiarle las opciones para crear trazados m?s bonitos
+### Ahora vamos a cambiarle las opciones para crear trazados más bonitos
 Qu?tale el borde a la derecha y la parte superior (bty='l'), agregue las etiquetas de los x e y (xlab and ylab), cambie el color de la l?nea (col=), y el ancho de la l?nea (lwd=).
 
 ```{r plot2, exercise=TRUE, exercise.eval=FALSE}
@@ -268,7 +267,7 @@ national<- rowSums(ds3)
 plot(date.index,national, type='l', bty='l', ylab='Counts', xlab='time', col='blue', lwd=0.5)
 ```
 
-### Grafique las primeras 3 columnas, que representan 3 estados diferentes. Se cumple esto usando un bucle, que traza columna 1, luego columna 2, luego columna 3. Est?n organizados en una fila (mfrow=c(1,3)). Agregue un t?tulo extrayendo los nombres de las ubicaciones en un vector (dimnames) y tomando el elemento i'to del vector. 
+### Grafique las primeras 3 columnas, que representan 3 estados diferentes. Se cumple esto usando un bucle, que traza columna 1, luego columna 2, luego columna 3. estan organizados en una fila (mfrow=c(1,3)). Agregue un t?tulo extrayendo los nombres de las ubicaciones en un vector (dimnames) y tomando el elemento i'to del vector. 
 
 ```{r plot3, exercise=TRUE, exercise.eval=FALSE}
 par(mfrow=c(1,3))
@@ -279,7 +278,7 @@ for(i in 1:3){
 }
 ```
 
-Aqu? se puede producir 4 trazados en un 2x2 matriz. Intente producir un 2x3 trazado con 6 estados.
+Aquí se puede producir 4 trazados en un 2x2 matriz. Intente producir un 2x3 trazado con 6 estados.
 ```{r plot4, exercise=TRUE, exercise.eval=FALSE}
 par(mfrow=c(2,2), mar=c(3,2,1,1))
 for(i in 1:4){
@@ -297,4 +296,4 @@ matplot(date.index,ds3, type='l', bty='l', ylab='Counts', xlab='time')
 
 
 ## RStudio
-Ahora vamos a RStudio y vamos a familiarizarse con la interfaz y aprender c?mo configurar el directorio o 'working directory', y c?mo instalar y cargar paquetes.
+Ahora vamos a RStudio y vamos a familiarizarse con la interfaz y aprender cómo configurar el directorio o 'working directory', y cómo instalar y cargar paquetes.
