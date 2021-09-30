@@ -310,6 +310,52 @@ matplot(date.index,ds3, type='l', bty='l', ylab='Counts', xlab='time')
 ```
 
 
+## Writing Functions
+
+We might want to perform certain custom operations. We can do this by writing and then running functions.
+
+As a silly example, let's provide the function with 2 numbers and add them together. 
+
+We will create a function call 'my.fun1'. This function has 2 inputs 'a' and 'b'. We will supply numeric values for a and b, which are added together and stored as 'z'. Then it will return z
+
+```{r makefun, exercise=TRUE, exercise.eval=FALSE}
+
+my.fun1 <- function(a,b){
+  z <- a + b
+  return(z)
+}
+
+```
+
+Now run the function. Change the input values of a and b and see what happens
+```{r fun2,exercise=T, exercise.eval=FALSE}
+#Define the function
+my.fun1 <- function(a,b){
+  z <- a + b
+  return(z)
+}
+
+#Call the function
+res1 <- my.fun1(a=1, b=1)
+print(res1)
+```
+
+Now try to add two vectors together (same function, but input vectors instead of single numbers (scalars))
+```{r fun3,exercise=TRUE, exercise.eval=FALSE}
+#Define the function
+my.fun1 <- function(a,b){
+  z <- a + b
+  return(z)
+}
+
+#Call the function
+res1 <- my.fun1(a=1:10, b=2:11)
+print(res1)
+```
+
+
+
+
 
 ## RStudio
 
