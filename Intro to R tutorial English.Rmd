@@ -17,6 +17,7 @@ library(learnr)
 library(lubridate)
 library(RCurl)
 library(reshape2)
+library(ggplot2)
 ```
 
 ```{r import, include=FALSE}
@@ -28,6 +29,7 @@ library(reshape2)
 
 ds1 <- readRDS('./Data/brazil_hosp.rds')
 ds1<-ds1[,c('age_group','date','J12_18')]
+ds1$date <- as.Date(ds1$date)
 ds2<-ds1[substr(ds1$age_group,1,2)=='09',]
 #Get rid of aggregated state and national levels
 ds2<-ds2[substr(ds2$age_group,4,4)!='A',]
@@ -36,6 +38,10 @@ ds2<-ds2[substr(ds2$age_group,6,7)!='AA',]
 # Reshape into a wide format--1 column per state
 ds3<-dcast(ds2, date~age_group, value.var='J12_18')
 ds3$date<-as.Date(ds3$date)
+
+ds.n <- dcast(ds2, date~., value.var='J12_18', fun.aggregate = sum)
+names(ds.n) <- c('date','cases')
+ds.n$date <- as.Date(ds.n$date)
 
 date.index <- ds3$date
 ds3<-ds3[,-1]
@@ -265,50 +271,60 @@ date2
 
 ## Making useful plots
 
-Let's plot the data. 'type='l' makes a line plot, which is good for time series
+Let's plot the aggregate national-level data. 
 
 ```{r plot1, exercise=TRUE, exercise.eval=FALSE}
-national <- rowSums(ds3)
-plot(date.index,national, type='l')
+head(ds.n)
 ```
 
-### Now let's make the plot look nicer by changing some plot options
+This is a bit ugly
+```{r}
+ggplot(ds.n, aes(x=date, y=cases)) + #Define the dataset used and the x and y variable names
+ geom_line()
+```
+### Make the plot look nicer
+You can use 'themes' to control the look of the plots. theme_classic is a nice clean one. And it is good practice to extend the yaxis to 0 with ylim
 
-Turn off the right and top borders (bty='l'), add x and y axis labels (xlab and ylab), change the color of the line (col=), and line width (lwd)
+```{r}
+ggplot(ds.n, aes(x=date, y=cases)) + #Define the dataset used and the x and y variable names
+ geom_line() +
+ theme_classic() + removes gray background
+  ylim(0, max(ds.n$cases)) #extend yaxis to 0
 
-```{r plot2, exercise=TRUE, exercise.eval=FALSE}
-national <- rowSums(ds3)
-plot(date.index,national, type='l', bty='l', ylab='Counts', xlab='time', col='blue', lwd=0.5)
 ```
 
-### Plot the first 3 columns, which represent 3 different states. 
+### Plot multiple states 
 
-We can do this using a loop, which plots column 1, then column 2, then column 3. They are arranged in a row (mfrow=c(1,3)). Add a title by extracting the names of the locations into a vector (dimnames) and taking the i'th element of the vector.
+To do this, we will start with a dataset that is in the 'long format'--1 row for each date/state combination.
 
+```{r}
+head(ds2)
+```
+ The code will look the same as above, but now we add a facet_wrap() function, which tells ggplot how to group the data. We will select just 3 states to look at
 ```{r plot3, exercise=TRUE, exercise.eval=FALSE}
-par(mfrow=c(1,3))
-for(i in 1:3){
-  plot(date.index, ds3[,i], type='l', bty='l', ylab='Counts', xlab='time')
-  title(dimnames(ds3)[[2]][i])
-}
+ds.subset <- ds2[ds2$age_group %in% c('09_1_11', '09_1_12', '09_1_13'),]
+
+ggplot(ds.subset, aes(x=date, y=J12_18)) + #Define the dataset used and the x and y variable names
+ geom_line() +
+ theme_classic() + #removes gray background
+  expand_limits(y=0)+ #extend yaxis to 0
+  facet_wrap(~age_group , scales='free') 
+
 ```
 
-Here we can plot 4 plots in a 2x2 array. Try doing a 2x3 plot with 6 states.
 
-```{r plot4, exercise=TRUE, exercise.eval=FALSE}
-par(mfrow=c(2,2), mar=c(3,2,1,1))
-for(i in 1:4){
-  plot(date.index,ds3[,i], type='l', bty='l', ylab='Counts', xlab='time')
-  title(dimnames(ds3)[[2]][i])
-}
-```
 
-### Now let's plot all of the time series at once using a matrix plot (matplot)
+### Now let's plot all of the time series at once 
+We can just tweak the code above. Remove the facet wrap statement, and add group= and col= statement to the first line
 
 ```{r plot5, exercise=TRUE, exercise.eval=FALSE}
-matplot(date.index,ds3, type='l', bty='l', ylab='Counts', xlab='time')
-```
+ds.subset <- ds2[ds2$age_group %in% c('09_1_11', '09_1_12', '09_1_13'),]
 
+ggplot(ds.subset, aes(x=date, y=J12_18, group=age_group, col=age_group)) + #Define the dataset used and the x and y variable names
+ geom_line() +
+ theme_classic() + #removes gray background
+  expand_limits(y=0) #extend yaxis to 0
+```
 
 ## Writing Functions
 
