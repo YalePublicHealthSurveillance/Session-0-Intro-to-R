@@ -288,8 +288,8 @@ You can use 'themes' to control the look of the plots. theme_classic is a nice c
 ```{r}
 ggplot(ds.n, aes(x=date, y=cases)) + #Define the dataset used and the x and y variable names
  geom_line() +
- theme_classic() + removes gray background
-  ylim(0, max(ds.n$cases)) #extend yaxis to 0
+ theme_classic() + #removes gray background
+  expand_limits(y=0) #extend yaxis to 0
 
 ```
 
