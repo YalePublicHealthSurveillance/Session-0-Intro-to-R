@@ -1,0 +1,64 @@
+---
+title: "Introduction to R-RMarkdown"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+---
+
+# Introduction to RMarkdown
+
+You can organize your file with headers. these start with a ## or ### For exmaple: 
+
+## Chunks in R Markdown
+
+RMarkdown files can be used to organize your code and to generate reproducible reports.
+
+The code is organized in 'chunks'
+
+## Load your packages
+In this first chunk, we tell R what packages we want to use using calls to library(). If they are not already installed on your computer, you will be prompted to install them. You only need to install a package once; then call it each time you open r using a library() call
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = FALSE)
+library(lubridate)
+library(RCurl)
+library(reshape2)
+library(ggplot2)
+```
+
+## Run Some code
+If you want to run the code in a chunk, you can run the whole chunk by clicking the little green triangle at the top of the chunk; or to run a single line,  put your cursor on the line and press CTRL+ENTER
+
+```{r}
+a1 <- 1+1
+a1
+```
+
+## Reading in files
+
+To read in a file, you can use functions like read_excel, read.csv, read.table, readRDS, depending on the file type. R has functions for reading in most types of data. You can provide the full file path of the file on your computer. Or if you are using an Rproject, as we are here, you can use **relative** paths. In the example below, the directory where the .Rproj file is is the 'working directory. The data folder is a subfolder of the working directory, and our file is in there. So we can use a './' to represent the working directory. That way, the code will always run the same regardless of what computer you are using.
+
+```{r import, include=FALSE}
+
+ds1 <- readRDS('./Data/brazil_hosp.rds')
+ds1<-ds1[,c('age_group','date','J12_18')]
+ds1$date <- as.Date(ds1$date)
+
+
+```
+
+## Getting help
+
+If you aren't sure how a function works, you can find help documents in the panel at the right, or type ?function_name
+
+```{r}
+?readRDS
+```
+
+## Knitting
+
+A nice feature of Rmarkdown files is they can generate reports in a variety of formats including html, pdf, .docx. Just click the 'knit' button at the top of the Rmd file to see the options.
+
+

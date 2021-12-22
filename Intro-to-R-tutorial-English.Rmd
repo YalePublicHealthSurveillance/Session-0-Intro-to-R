@@ -11,16 +11,13 @@ output:
 runtime: shiny_prerendered
 ---
 
-```{r, include=F}
+```{r setup, include=F}
 knitr::opts_chunk$set(echo = FALSE)
 library(learnr)
 library(lubridate)
 library(RCurl)
 library(reshape2)
 library(ggplot2)
-```
-
-```{r import, include=FALSE}
 # Any object created here will be available in global environment. Any objects created within excercise chunks are only available within the chunk
 
 # x <- getURL("https://raw.githubusercontent.com/weinbergerlab/Brazil_state/master/prelog_Brazil_state_processed_data.csv")
@@ -52,7 +49,15 @@ length.state31<-length(state31)
 time.index <- 1:length.state31 
 mat1<-cbind(time.index, state31) #combine into matrix
 
+my.fun1 <- function(a,b){
+  z <- a + b
+  return(z)
+}
+
+
 ```
+
+
 
 
 # Introduction to R
@@ -314,7 +319,7 @@ ggplot(ds.subset, aes(x=date, y=J12_18)) + #Define the dataset used and the x an
 
 
 
-### Now let's plot all of the time series at once 
+### Now let's plot all of the time series on the same axis 
 We can just tweak the code above. Remove the facet wrap statement, and add group= and col= statement to the first line
 
 ```{r plot5, exercise=TRUE, exercise.eval=FALSE}
@@ -345,12 +350,6 @@ my.fun1 <- function(a,b){
 
 Now run the function. Change the input values of a and b and see what happens
 ```{r fun2,exercise=T, exercise.eval=FALSE}
-#Define the function
-my.fun1 <- function(a,b){
-  z <- a + b
-  return(z)
-}
-
 #Call the function
 res1 <- my.fun1(a=1, b=1)
 print(res1)
@@ -358,14 +357,9 @@ print(res1)
 
 Now try to add two vectors together (same function, but input vectors instead of single numbers (scalars))
 ```{r fun3,exercise=TRUE, exercise.eval=FALSE}
-#Define the function
-my.fun1 <- function(a,b){
-  z <- a + b
-  return(z)
-}
-
 #Call the function
 res1 <- my.fun1(a=1:10, b=2:11)
+
 print(res1)
 ```
 
@@ -375,4 +369,4 @@ print(res1)
 
 ## RStudio
 
-Now let's go to RStudio and get familiar with the interface and learn how to set the working directory, and how to install and load packages.
+Now let's go to RStudio and get familiar with the interface 
